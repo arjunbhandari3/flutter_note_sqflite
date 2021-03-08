@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sqflite_note/controllers/note_controller.dart';
+import 'package:flutter_sqflite_note/views/note_list_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:flutter_sqflite_note/views/edit_note_view.dart';
@@ -42,6 +43,17 @@ class NoteCard extends GetWidget<NoteController> {
                       onPressed: () => Get.to(EditNoteView(note: note)),
                     ),
                     IconButton(
+                      color: Colors.black,
+                      icon: Icon(Icons.share),
+                      onPressed: () {
+                        controller.shareNote(
+                          note.title,
+                          note.description,
+                          note.dateTimeEdited,
+                        );
+                      },
+                    ),
+                    IconButton(
                       color: Colors.red,
                       icon: Icon(Icons.delete),
                       onPressed: () => Get.bottomSheet(
@@ -50,8 +62,48 @@ class NoteCard extends GetWidget<NoteController> {
                             children: <Widget>[
                               GestureDetector(
                                 onTap: () {
-                                  controller.deleteNote(note);
-                                  Get.back();
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        content: Text(
+                                          "Are you sure you want to delete the note?",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 18,
+                                            color: Colors.black87,
+                                          ),
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              "No",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 18,
+                                                color: Colors.black87,
+                                              ),
+                                            ),
+                                          ),
+                                          FlatButton(
+                                            onPressed: () {
+                                              controller.deleteNote(note);
+                                              Get.offAll(NoteListView());
+                                            },
+                                            child: Text(
+                                              "Yes",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 18,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 child: Container(
                                   margin: EdgeInsets.symmetric(

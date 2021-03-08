@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sqflite_note/helpers/db_helper.dart';
 import 'package:flutter_sqflite_note/models/note_model.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 
 class NoteController extends GetxController {
   TextEditingController titleTextController = TextEditingController();
@@ -60,5 +61,9 @@ class NoteController extends GetxController {
   void deleteAllNotes() async {
     await DBHelper.deleteAllNotes();
     getNotes();
+  }
+
+  void shareNote(String title, String content, String dateTimeEdited) {
+    Share.share("$title \n$dateTimeEdited\n\n$content");
   }
 }
