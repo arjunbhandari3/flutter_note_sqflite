@@ -5,14 +5,10 @@ import 'package:flutter_sqflite_note/models/note_model.dart';
 import 'package:get/get.dart';
 
 class NoteController extends GetxController {
-  final notes = List<NoteModel>().obs;
-
   TextEditingController titleTextController = TextEditingController();
   TextEditingController descriptionTextController = TextEditingController();
 
-  NoteController() {
-    getNotes();
-  }
+  final notes = List<NoteModel>().obs;
 
   @override
   void onInit() {
@@ -29,6 +25,8 @@ class NoteController extends GetxController {
       dateTimeCreated:
           DateFormat("EEE, MMM dd, yyyy hh:mm a").format(DateTime.now()),
     ));
+    getNotes();
+    Get.back();
   }
 
   void getNotes() async {
@@ -50,10 +48,6 @@ class NoteController extends GetxController {
       dateTimeCreated: dTCreated,
     );
     await DBHelper.update(note);
-
-    titleTextController.text = '';
-    descriptionTextController.text = '';
-
     getNotes();
     Get.back();
   }

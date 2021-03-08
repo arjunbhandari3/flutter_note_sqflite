@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddNoteView extends StatelessWidget {
-  final controller = Get.put(NoteController());
+  final NoteController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -61,7 +61,6 @@ class AddNoteView extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       await controller.addNote();
-                      Get.back();
                     }
                   },
                   child: Container(

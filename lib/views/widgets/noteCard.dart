@@ -49,7 +49,7 @@ class NoteCard extends GetWidget<NoteController> {
                           child: Wrap(
                             children: <Widget>[
                               GestureDetector(
-                                onTap: () async {
+                                onTap: () {
                                   controller.deleteNote(note);
                                   Get.back();
                                 },

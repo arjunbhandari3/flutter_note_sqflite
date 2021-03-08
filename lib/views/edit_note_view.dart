@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditNoteView extends StatelessWidget {
-  final controller = Get.put(NoteController());
+  final NoteController controller = Get.find();
   final NoteModel note;
   final _formKey = GlobalKey<FormState>();
 
@@ -71,7 +71,6 @@ class EditNoteView extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       controller.updateNote(note.id, note.dateTimeCreated);
-                      Get.back();
                     }
                   },
                   child: Container(

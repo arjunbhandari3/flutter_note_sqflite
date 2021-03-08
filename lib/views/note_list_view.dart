@@ -92,13 +92,13 @@ class NoteListView extends StatelessWidget {
           ),
         ],
       ),
-      body: controller.notes.length > 0
-          ? SingleChildScrollView(
-              child: Container(
-                color: Colors.white70,
-                padding: EdgeInsets.all(16),
-                child: Obx(
-                  () => ListView.separated(
+      body: Obx(
+        () => controller.notes.isNotEmpty
+            ? SingleChildScrollView(
+                child: Container(
+                  color: Colors.white70,
+                  padding: EdgeInsets.all(16),
+                  child: ListView.separated(
                     itemCount: controller.notes.length,
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
@@ -109,24 +109,23 @@ class NoteListView extends StatelessWidget {
                     },
                   ),
                 ),
-              ),
-            )
-          : Container(
-              alignment: Alignment.center,
-              child: Center(
-                child: Text(
-                  "You don't have any Notes",
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    color: Colors.black,
+              )
+            : Container(
+                alignment: Alignment.center,
+                child: Center(
+                  child: Text(
+                    "You don't have any Notes",
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
-            ),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           await Get.to(AddNoteView());
-          controller.getNotes();
         },
         backgroundColor: Color(0xff0A2662),
         label: Text(
