@@ -1,6 +1,6 @@
 # NoteTaker
 
-A simple note taking app built with Google's Flutter Framework.
+A simple note taking app built with Google's Flutter Framework usinv Getx for state management.
 
 ## ScreenShots
 
