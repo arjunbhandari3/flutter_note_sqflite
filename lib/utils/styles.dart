@@ -4,10 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 InputDecoration styleTextInputDecoration = InputDecoration(
   fillColor: Colors.grey[200],
   filled: true,
-  labelStyle: GoogleFonts.poppins(
-    color: Colors.grey,
-    fontSize: 18,
-  ),
   hintStyle: GoogleFonts.poppins(
     color: Colors.grey,
     fontSize: 18,

@@ -15,11 +15,11 @@ class SearchBar extends SearchDelegate {
     return [
       IconButton(
         icon: Icon(
-          Icons.backspace_outlined,
+          Icons.close,
           color: Colors.black,
         ),
         onPressed: () {
-          stdin.readLineSync().replaceAll(RegExp(r'.$'), "");
+          query = "";
         },
       ),
     ];
