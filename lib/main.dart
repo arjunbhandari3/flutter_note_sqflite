@@ -10,7 +10,7 @@ Future<void> main() async {
   await DBHelper.initDb();
 
   SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: Color(0xff0A2662)));
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   //* Forcing only portrait orientation
   SystemChrome.setPreferredOrientations(

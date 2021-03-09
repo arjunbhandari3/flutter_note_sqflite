@@ -1,3 +1,4 @@
+import 'package:flutter_sqflite_note/views/note_list_view.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sqflite_note/helpers/db_helper.dart';
@@ -6,8 +7,8 @@ import 'package:get/get.dart';
 import 'package:share/share.dart';
 
 class NoteController extends GetxController {
-  TextEditingController titleTextController = TextEditingController();
-  TextEditingController descriptionTextController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   final notes = List<NoteModel>().obs;
 
@@ -19,8 +20,8 @@ class NoteController extends GetxController {
 
   Future<void> addNote() async {
     await DBHelper.insert(NoteModel(
-      description: descriptionTextController.text,
-      title: titleTextController.text,
+      description: descriptionController.text,
+      title: titleController.text,
       dateTimeEdited:
           DateFormat("EEE, MMM dd, yyyy hh:mm a").format(DateTime.now()),
       dateTimeCreated:
@@ -31,8 +32,8 @@ class NoteController extends GetxController {
   }
 
   void getNotes() async {
-    titleTextController.text = '';
-    descriptionTextController.text = '';
+    titleController.text = '';
+    descriptionController.text = '';
 
     List<Map<String, dynamic>> noteList = await DBHelper.query();
     notes.assignAll(
@@ -40,17 +41,19 @@ class NoteController extends GetxController {
   }
 
   void updateNote(id, String dTCreated) async {
+    final title = titleController.text;
+    final description = descriptionController.text;
     NoteModel note = NoteModel(
       id: id,
-      title: titleTextController.text,
-      description: descriptionTextController.text,
+      title: title,
+      description: description,
       dateTimeEdited:
           DateFormat("EEE, MMM dd, yyyy hh:mm a").format(DateTime.now()),
       dateTimeCreated: dTCreated,
     );
     await DBHelper.update(note);
     getNotes();
-    Get.back();
+    Get.offAll(NoteListView());
   }
 
   void deleteNote(NoteModel noteModel) async {

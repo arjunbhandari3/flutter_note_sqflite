@@ -5,8 +5,7 @@ import 'package:flutter_sqflite_note/utils/styles.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditNoteView extends StatelessWidget {
-  final NoteController controller = Get.find();
+class EditNoteView extends GetView<NoteController> {
   final NoteModel note;
   final _formKey = GlobalKey<FormState>();
 
@@ -14,8 +13,8 @@ class EditNoteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller.titleTextController.text = note.title;
-    controller.descriptionTextController.text = note.description;
+    controller.titleController.text = note.title;
+    controller.descriptionController.text = note.description;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -37,21 +36,20 @@ class EditNoteView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  controller: controller.titleTextController,
+                  controller: controller.titleController,
+                  showCursor: true,
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   decoration:
                       styleTextInputDecoration.copyWith(hintText: 'Title'),
                   validator: (value) => value.trim().isNotEmpty
                       ? null
                       : 'Please give title to note',
-                  onSaved: (value) =>
-                      controller.titleTextController.text = value,
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 TextFormField(
-                  controller: controller.descriptionTextController,
+                  controller: controller.descriptionController,
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   maxLines: 10,
                   decoration: styleTextInputDecoration.copyWith(
@@ -59,8 +57,6 @@ class EditNoteView extends StatelessWidget {
                   validator: (value) => value.trim().isNotEmpty
                       ? null
                       : 'Please give description to note',
-                  onSaved: (value) =>
-                      controller.descriptionTextController.text = value,
                 ),
                 SizedBox(
                   height: 16,

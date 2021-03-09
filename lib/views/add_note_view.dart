@@ -4,8 +4,7 @@ import 'package:flutter_sqflite_note/utils/styles.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddNoteView extends StatelessWidget {
-  final NoteController controller = Get.find();
+class AddNoteView extends GetView<NoteController> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -31,7 +30,7 @@ class AddNoteView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  controller: controller.titleTextController,
+                  controller: controller.titleController,
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   decoration:
                       styleTextInputDecoration.copyWith(hintText: 'Title'),
@@ -43,7 +42,7 @@ class AddNoteView extends StatelessWidget {
                   height: 16,
                 ),
                 TextFormField(
-                  controller: controller.descriptionTextController,
+                  controller: controller.descriptionController,
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   maxLines: 10,
                   decoration: styleTextInputDecoration.copyWith(
