@@ -66,7 +66,7 @@ class NoteController extends GetxController {
     getNotes();
   }
 
-  void shareNote(String title, String content, String dateTimeEdited) {
-    Share.share("$title \n$dateTimeEdited\n\n$content");
+  void shareNote(String title, String description, String dateTimeEdited) {
+    Share.share("$title \n$dateTimeEdited\n\n$description");
   }
 }
