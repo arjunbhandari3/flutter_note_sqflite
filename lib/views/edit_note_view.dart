@@ -6,15 +6,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EditNoteView extends GetView<NoteController> {
-  final NoteModel note;
+  final NoteModel? note;
   final _formKey = GlobalKey<FormState>();
 
-  EditNoteView({Key key, this.note}) : super(key: key);
+  EditNoteView({Key? key, this.note}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.titleController.text = note.title;
-    controller.descriptionController.text = note.description;
+    controller.titleController.text = note!.title!;
+    controller.descriptionController.text = note!.description!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -41,7 +41,7 @@ class EditNoteView extends GetView<NoteController> {
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   decoration:
                       styleTextInputDecoration.copyWith(hintText: 'Title'),
-                  validator: (value) => value.trim().isNotEmpty
+                  validator: (value) => value!.trim().isNotEmpty
                       ? null
                       : 'Please give title to note',
                 ),
@@ -54,21 +54,24 @@ class EditNoteView extends GetView<NoteController> {
                   maxLines: 10,
                   decoration: styleTextInputDecoration.copyWith(
                       hintText: 'Description'),
-                  validator: (value) => value.trim().isNotEmpty
+                  validator: (value) => value!.trim().isNotEmpty
                       ? null
                       : 'Please give description to note',
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                RaisedButton(
-                  color: Color(0xFF1A0551),
-                  shape: StadiumBorder(),
+                ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
-                      controller.updateNote(note.id, note.dateTimeCreated);
+                    if (_formKey.currentState!.validate()) {
+                      controller.updateNote(note!.id, note!.dateTimeCreated);
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF1A0551),
+                    onPrimary: Color(0xFF330B99),
+                    shape: StadiumBorder(),
+                  ),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),

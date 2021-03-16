@@ -34,7 +34,7 @@ class AddNoteView extends GetView<NoteController> {
                   style: GoogleFonts.poppins(color: Colors.black, fontSize: 18),
                   decoration:
                       styleTextInputDecoration.copyWith(hintText: 'Title'),
-                  validator: (value) => value.trim().isNotEmpty
+                  validator: (value) => value!.trim().isNotEmpty
                       ? null
                       : 'Please give title to note',
                 ),
@@ -47,28 +47,31 @@ class AddNoteView extends GetView<NoteController> {
                   maxLines: 10,
                   decoration: styleTextInputDecoration.copyWith(
                       hintText: 'Description'),
-                  validator: (value) => value.trim().isNotEmpty
+                  validator: (value) => value!.trim().isNotEmpty
                       ? null
                       : 'Please give discription to note',
                 ),
                 SizedBox(
                   height: 16,
                 ),
-                RaisedButton(
-                  color: Color(0xFF1A0551),
-                  shape: StadiumBorder(),
+                ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       await controller.addNote();
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF1A0551),
+                    onPrimary: Color(0xFF330B99),
+                    shape: StadiumBorder(),
+                  ),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
                     child: Text(
                       'Add Note',
                       style: GoogleFonts.poppins(
-                        fontSize: 25,
+                        fontSize: 22,
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),

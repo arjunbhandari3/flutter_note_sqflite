@@ -10,7 +10,7 @@ class NoteController extends GetxController {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  final notes = List<NoteModel>().obs;
+  final notes = [].obs;
 
   @override
   void onInit() {
@@ -40,7 +40,7 @@ class NoteController extends GetxController {
         noteList.map((data) => new NoteModel.fromJson(data)).toList());
   }
 
-  void updateNote(id, String dTCreated) async {
+  void updateNote(id, String? dTCreated) async {
     final title = titleController.text;
     final description = descriptionController.text;
     NoteModel note = NoteModel(
@@ -66,7 +66,7 @@ class NoteController extends GetxController {
     getNotes();
   }
 
-  void shareNote(String title, String content, String dateTimeEdited) {
-    Share.share("$title \n$dateTimeEdited\n\n$content");
+  void shareNote(String? title, String? description, String? dateTimeEdited) {
+    Share.share("$title \n$dateTimeEdited\n\n$description");
   }
 }

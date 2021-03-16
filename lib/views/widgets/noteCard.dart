@@ -24,7 +24,7 @@ class NoteCard extends GetWidget<NoteController> {
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    note.title,
+                    note.title!,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.poppins(
@@ -75,7 +75,7 @@ class NoteCard extends GetWidget<NoteController> {
                                           ),
                                         ),
                                         actions: [
-                                          FlatButton(
+                                          TextButton(
                                             onPressed: () {
                                               Get.back();
                                             },
@@ -87,7 +87,7 @@ class NoteCard extends GetWidget<NoteController> {
                                               ),
                                             ),
                                           ),
-                                          FlatButton(
+                                          TextButton(
                                             onPressed: () {
                                               controller.deleteNote(note);
                                               Get.offAll(NoteListView());
@@ -181,7 +181,7 @@ class NoteCard extends GetWidget<NoteController> {
               thickness: 2,
             ),
             Text(
-              note.description,
+              note.description!,
               maxLines: 4,
               softWrap: true,
               overflow: TextOverflow.ellipsis,
@@ -194,7 +194,7 @@ class NoteCard extends GetWidget<NoteController> {
               height: 10,
             ),
             Text(
-              note.dateTimeEdited,
+              note.dateTimeEdited!,
               style: GoogleFonts.poppins(
                 fontSize: 15,
                 color: Colors.black87,

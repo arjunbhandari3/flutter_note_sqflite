@@ -1,9 +1,9 @@
 class NoteModel {
-  int id;
-  String description;
-  String title;
-  String dateTimeEdited;
-  String dateTimeCreated;
+  int? id;
+  String? description;
+  String? title;
+  String? dateTimeEdited;
+  String? dateTimeCreated;
 
   NoteModel({
     this.id,

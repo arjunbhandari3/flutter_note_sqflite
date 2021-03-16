@@ -32,7 +32,7 @@ class NoteListView extends StatelessWidget {
             },
           ),
           PopupMenuButton(
-            onSelected: (val) {
+            onSelected: (dynamic val) {
               if (val == 0) {
                 showDialog(
                   context: context,
@@ -47,7 +47,7 @@ class NoteListView extends StatelessWidget {
                         ),
                       ),
                       actions: [
-                        FlatButton(
+                        TextButton(
                           onPressed: () {
                             Get.back();
                           },
@@ -59,9 +59,9 @@ class NoteListView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        FlatButton(
+                        TextButton(
                           onPressed: () {
-                            controller.deleteAllNotes();
+                            controller!.deleteAllNotes();
                             Get.back();
                           },
                           child: Text(
@@ -93,18 +93,18 @@ class NoteListView extends StatelessWidget {
         ],
       ),
       body: Obx(
-        () => controller.notes.isNotEmpty
+        () => controller!.notes.isNotEmpty
             ? SingleChildScrollView(
                 child: Container(
                   color: Colors.white70,
                   padding: EdgeInsets.all(16),
                   child: ListView.separated(
-                    itemCount: controller.notes.length,
+                    itemCount: controller!.notes.length,
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     separatorBuilder: (context, int) => SizedBox(height: 10),
                     itemBuilder: (context, index) {
-                      NoteModel note = controller.notes[index];
+                      NoteModel note = controller!.notes[index];
                       return NoteCard(note);
                     },
                   ),

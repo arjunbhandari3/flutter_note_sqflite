@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +38,7 @@ class SearchBar extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return null;
+    return Container();
   }
 
   @override
@@ -49,8 +47,8 @@ class SearchBar extends SearchDelegate {
         ? controller.notes
         : controller.notes.where(
             (p) {
-              return p.title.toLowerCase().contains(query.toLowerCase()) ||
-                  p.description.toLowerCase().contains(query.toLowerCase());
+              return p.title!.toLowerCase().contains(query.toLowerCase()) ||
+                  p.description!.toLowerCase().contains(query.toLowerCase());
             },
           ).toList();
 
